@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raushan Kumar Singh | Operations Executive</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --primary: #0f172a;
+    --secondary: #1e3a8a;
+    --accent: #d4a853;
+    --accent-light: #f0e6c8;
+    --text: #334155;
+    --text-light: #64748b;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --success: #10b981;
+  }
+
+  /* Dark Mode */
+  body.dark {
+    --bg: #020617;
+    --text: #e2e8f0;
+    --text-light: #94a3b8;
+    --secondary: #1e40af;
+    --white: #0f172a;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    padding: 0 24px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+  }
+
+  .logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-links { display: flex; list-style: none; gap: 32px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .theme-toggle {
+    background: transparent;
+    border: 2px solid rgba(212,168,83,0.4);
+    color: var(--accent);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  .theme-toggle:hover { background: var(--accent); color: var(--primary); transform: rotate(180deg); }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -50%;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(212,168,83,0.1), transparent 70%);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,30px)} }
+
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-content h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+
+  .hero-content .title {
+    font-size: 1.25rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 36px;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .meta-item { display: flex; align-items: center; gap: 8px; }
+  .meta-icon { color: var(--accent); font-size: 1.1rem; }
+
+  .hero-buttons { display: flex; gap: 16px; margin-bottom: 40px; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--primary);
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(212,168,83,0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(212,168,83,0.4);
+  }
+
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 13px 31px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--accent);
+  }
+
+  /* Hero Avatar */
+  .hero-avatar {
+    position: relative;
+  }
+
+  .avatar-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #f59e0b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--primary);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    border: 4px solid rgba(255,255,255,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-ring {
+    position: absolute;
+    inset: -8px;
+    border: 3px dashed var(--accent);
+    border-radius: 50%;
+    animation: spin 20s linear infinite;
+    opacity: 0.4;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Achievement Badge */
+  .achievement-badge {
+    position: absolute;
+    bottom: 10px; right: -10px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: var(--primary);
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+    box-shadow: 0 8px 20px rgba(245,158,11,0.4);
+    animation: pulse 2s infinite;
+    z-index: 10;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .achievement-badge .star { font-size: 1.2rem; }
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    background: var(--white);
+    padding: 40px 24px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+  }
+
+  .stats-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    text-align: center;
+  }
+
+  .stat-item h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--secondary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-item p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 4px;
+    background: linear-gradient(to right, var(--accent), var(--secondary));
+    border-radius: 2px;
+  }
+
+  /* SUMMARY CARD */
+  .summary-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 44px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    border-left: 6px solid var(--accent);
+  }
+
+  .summary-card::before {
+    content: '"';
+    position: absolute;
+    top: -20px; right: 20px;
+    font-size: 150px;
+    opacity: 0.04;
+    font-family: serif;
+    color: var(--secondary);
+  }
+
+  .summary-text {
+    font-size: 1.08rem;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  /* SKILLS GRID */
+  .skills-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+  }
+
+  .skill-category {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .skill-cat-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--secondary);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-list { list-style: none; }
+  .skill-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+  }
+
+  .skill-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--accent), var(--secondary));
+    border-radius: 2px;
+  }
+
+  .job-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .job-card:hover {
+    transform: translateX(8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  .job-dot {
+    position: absolute;
+    left: -34px; top: 36px;
+    width: 18px; height: 18px;
+    background: var(--accent);
+    border: 4px solid var(--white);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+    gap: 12px;
+  }
+
+  .company-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .date-badge {
+    background: var(--secondary);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .role-title {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1.02rem;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+
+  .award-highlight {
+    display: inline-block;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+    border-left: 4px solid #f59e0b;
+    box-shadow: 0 2px 8px rgba(245,158,11,0.2);
+  }
+
+  .job-details ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .job-details li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 10px;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .job-details li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .edu-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--secondary);
+    transition: transform 0.3s;
+  }
+
+  .edu-card:hover { transform: translateY(-4px); }
+
+  .degree {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .institution { color: var(--text-light); font-size: 0.95rem; }
+  .year-badge {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--accent-light);
+    color: var(--secondary);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  /* LANGUAGES */
+  .lang-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .lang-pill {
+    background: var(--secondary);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(30,58,138,0.3);
+    transition: transform 0.2s;
+  }
+
+  .lang-pill:hover { transform: scale(1.05); }
+
+  /* LINKEDIN BUTTON */
+  .btn-linkedin {
+    background: #0077b5;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(0,119,181,0.3);
+  }
+  .btn-linkedin:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,119,181,0.5);
+    background: #005fa3;
+  }
+
+  /* PROFILE PHOTO */
+  .avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .avatar-initials {
+    font-family: 'Poppins', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+
+  /* TESTIMONIALS */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+
+  .testimonial-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-top: 4px solid var(--accent);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  }
+
+  .testimonial-quote {
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+
+  .testimonial-text {
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: var(--text);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.95rem;
+  }
+
+  .author-role {
+    font-size: 0.82rem;
+    color: var(--text-light);
+  }
+
+  .star-rating {
+    color: #f59e0b;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 40px 24px;
+    margin-top: 40px;
+  }
+
+  footer p { margin-bottom: 8px; font-size: 0.95rem; }
+  footer a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-container { grid-template-columns: 1fr; text-align: center; }
+    .hero-avatar { order: -1; margin: 0 auto 30px; }
+    .hero-meta { justify-content: center; }
+    .hero-buttons { justify-content: center; flex-wrap: wrap; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .nav-links { display: none; } /* Simplified mobile nav */
+    .skills-wrapper { grid-template-columns: 1fr; }
+    .timeline { padding-left: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">RS<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">🌙</button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content fade-up">
+      <h1>Raushan<br>Kumar Singh</h1>
+      <div class="title">Operations Executive | TPA & Financial Services Specialist</div>
+      
+      <div class="hero-meta">
+        <div class="meta-item"><span class="meta-icon">📍</span> Chandan Nagar, Pune 411014</div>
+        <div class="meta-item"><span class="meta-icon">📞</span> 7070777443</div>
+        <div class="meta-item"><span class="meta-icon">✉️</span> raushankrsingh802214@gmail.com</div>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary" onclick="downloadResumePDF(event)">
+          ⬇️ Download Resume (PDF)
+        </a>
+        <a href="mailto:raushankrsingh802214@gmail.com" class="btn-outline">
+          ✉️ Contact Me
+        </a>
+        <a href="https://www.linkedin.com/in/raushan-kumar-singh-3706a62a2" target="_blank" class="btn-linkedin">
+          💼 LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-avatar fade-up">
+      <div class="avatar-ring"></div>
+      <div class="avatar-circle" id="avatarCircle">
+        <label for="photoUpload" style="cursor:pointer;width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:50%;overflow:hidden;" title="Click to upload your photo">
+          <img id="profileImg" src="" alt="Profile" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;">
+          <span class="avatar-initials" id="avatarInitials">RS</span>
+        </label>
+        <input type="file" id="photoUpload" accept="image/*" style="display:none;" onchange="loadPhoto(event)">
+      </div>
+      <!-- Badge -->
+      <div class="achievement-badge">
+        <span class="star">⭐</span>
+        <strong>BEST EMPLOYEE</strong>
+        <small>FEB 2026</small>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:0.75rem;color:rgba(255,255,255,0.5);">📷 Click photo to upload</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar fade-up">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <h3 id="counter1">500+</h3>
+      <p>Claims/Month</p>
+    </div>
+    <div class="stat-item">
+      <h3 id="counter2">200+</h3>
+      <p>Cases Daily</p>
+    </div>
+    <div class="stat-item">
+      <h3 id="counter3">100%</h3>
+      <p>Accuracy Rate</p>
+    </div>
+    <div class="stat-item">
+      <h3 id="counter4">2+</h3>
+      <p>Years Experience</p>
+    </div>
+  </div>
+</div>
+
+<!-- About/Summary -->
+<section class="section" id="about">
+  <div class="section-header fade-up">
+    <h2 class="section-title">Professional Summary</h2>
+  </div>
+  
+  <div class="summary-card fade-up">
+    <p class="summary-text">
+      Detail-oriented Operations Executive with <strong>2+ years of experience</strong> in Health Insurance TPA and Financial Services, specializing in claims processing, payment operations, document verification, and customer communication. Skilled in <strong>SAP, CRM systems, and MS Excel</strong>, with a proven ability to manage high-volume workflows — processing <strong>200+ cases daily</strong> and handling <strong>80–100 client emails</strong> — while maintaining <strong>100% accuracy</strong> and full regulatory compliance. Recognized as <strong style="color:#d4a853;">Best Employee of the Month (February 2026)</strong> for outstanding performance and operational excellence.
+    </p>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="section" id="experience">
+  <div class="section-header fade-up">
+    <h2 class="section-title">Professional Journey</h2>
+  </div>
+
+  <div class="timeline">
+    
+    <!-- Job 1 -->
+    <div class="job-card fade-up">
+      <div class="job-dot"></div>
+      <div class="job-header">
+        <div class="company-name">Md India Networx TPA</div>
+        <div class="date-badge">Jun 2025 – Present</div>
+      </div>
+      <div class="role-title">Claims & Payment Operations Executive — ONGC Project</div>
+      <div class="award-highlight">⭐ Best Employee of the Month — February 2026</div>
+      <div class="job-details">
+        <ul>
+          <li>Managed <strong>80–100 client emails daily</strong> with zero-delay responses, ensuring seamless communication with ONGC representatives.</li>
+          <li>Processed and validated <strong>500+ health insurance claims</strong> and reimbursement requests monthly for ONGC employees with 100% accuracy.</li>
+          <li>Resolved payment queries, verified transaction details, and coordinated approvals within defined TAT — reducing resolution time by maintaining proactive follow-up.</li>
+          <li>Evaluated claim documents and payment eligibility per ONGC contract terms and TPA regulatory guidelines, ensuring full compliance.</li>
+          <li>Maintained audit-ready records in CRM/ticketing systems, supporting compliance reporting and client review processes with zero discrepancies.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Job 2 -->
+    <div class="job-card fade-up">
+      <div class="job-dot"></div>
+      <div class="job-header">
+        <div class="company-name">Altruist Technology Pvt. Ltd.</div>
+        <div class="date-badge">Aug 2024 – May 2025</div>
+      </div>
+      <div class="role-title">Financial Services Operations Executive — Bajaj Finserv</div>
+      <div class="job-details">
+        <ul>
+          <li>Processed <strong>200+ customer cases per day</strong> with zero-error accuracy for Bajaj Finserv EMI Card backend operations — consistently meeting daily targets.</li>
+          <li>Evaluated and processed credit limit enhancement requests by verifying eligibility criteria and coordinating approvals through internal systems.</li>
+          <li>Executed KYC-linked profile updates (name corrections, DOB amendments) in strict compliance with data verification protocols.</li>
+          <li>Validated customer documents for account modifications, ensuring accurate data entry and timely record updates within defined TAT.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="section" id="skills">
+  <div class="section-header fade-up">
+    <h2 class="section-title">Key Skills</h2>
+  </div>
+
+  <div class="skills-wrapper">
+    <!-- Technical -->
+    <div class="skill-category fade-up">
+      <h3 class="skill-cat-title">💻 Technical Proficiency</h3>
+      <ul class="skill-list">
+        <li><span class="skill-bullet"></span> MS Excel (Data Entry & Formatting)</li>
+        <li><span class="skill-bullet"></span> Outlook & Email Management</li>
+        <li><span class="skill-bullet"></span> SAP (Data Entry & Tracking)</li>
+        <li><span class="skill-bullet"></span> CRM & Ticketing Systems</li>
+        <li><span class="skill-bullet"></span> e-Claim Portal</li>
+        <li><span class="skill-bullet"></span> MS Office Suite</li>
+      </ul>
+    </div>
+
+    <!-- Operational -->
+    <div class="skill-category fade-up">
+      <h3 class="skill-cat-title">⚙️ Operational Expertise</h3>
+      <ul class="skill-list">
+        <li><span class="skill-bullet"></span> Claim Processing & Validation</li>
+        <li><span class="skill-bullet"></span> Document Verification & KYC Compliance</li>
+        <li><span class="skill-bullet"></span> Payment Processing & Reimbursement</li>
+        <li><span class="skill-bullet"></span> Back Office Operations</li>
+        <li><span class="skill-bullet"></span> Audit & Compliance Reporting</li>
+        <li><span class="skill-bullet"></span> SLA / TAT Adherence</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section" id="education">
+  <div class="section-header fade-up">
+    <h2 class="section-title">Education</h2>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card fade-up">
+      <div class="degree">B.A. (Bachelor of Arts)</div>
+      <div class="institution">Anjabit Singh College — 2nd Year (Pursuing)</div>
+      <div class="year-badge">Expected 2029</div>
+    </div>
+
+    <div class="edu-card fade-up">
+      <div class="degree">Intermediate / 10+2 (Science)</div>
+      <div class="institution">Ram Rup 10+2 High School</div>
+      <div class="year-badge">2025</div>
+    </div>
+
+    <div class="edu-card fade-up">
+      <div class="degree">Matriculation / 10th</div>
+      <div class="institution">Ram Rup 10+2 High School</div>
+      <div class="year-badge">2021</div>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div class="fade-up" style="margin-top:48px; text-align:center;">
+    <h3 style="font-family:'Poppins';color:var(--primary);margin-bottom:16px;font-size:1.3rem;">Languages I Speak</h3>
+    <div class="lang-container">
+      <div class="lang-pill">🇮🇳 Hindi</div>
+      <div class="lang-pill">🇬🇧 English</div>
+      <div class="lang-pill">🔤 Marathi</div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section" id="testimonials">
+  <div class="section-header fade-up">
+    <h2 class="section-title">What People Say</h2>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-quote">"</div>
+      <div class="star-rating">★★★★★</div>
+      <p class="testimonial-text">Raushan is one of the most dedicated team members I have worked with. His accuracy in processing 500+ claims monthly and zero-delay email responses make him an invaluable asset to our ONGC project.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">TM</div>
+        <div>
+          <div class="author-name">Team Manager</div>
+          <div class="author-role">Md India Networx TPA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-quote">"</div>
+      <div class="star-rating">★★★★★</div>
+      <p class="testimonial-text">Exceptional work ethic and attention to detail. Raushan consistently met and exceeded daily targets during his time with us. His ability to handle 200+ cases per day without errors is truly commendable.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SL</div>
+        <div>
+          <div class="author-name">Senior Lead</div>
+          <div class="author-role">Altruist Technology Pvt. Ltd.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-quote">"</div>
+      <div class="star-rating">★★★★★</div>
+      <p class="testimonial-text">Receiving Best Employee of the Month is no small feat. Raushan's proactive communication, compliance awareness, and operational discipline set a benchmark for the entire team.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">HR</div>
+        <div>
+          <div class="author-name">HR Department</div>
+          <div class="author-role">Md India Networx TPA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <p style="font-size:1.2rem;margin-bottom:12px;font-weight:600;">Ready to Connect?</p>
+  <p>📞 <a href="tel:7070777443">7070777443</a> • ✉️ <a href="mailto:raushankrsingh802214@gmail.com">raushankrsingh802214@gmail.com</a></p>
+  <p style="margin-top:20px;opacity:0.7;font-size:0.85rem;">© 2025 Raushan Kumar Singh. Crafted with 💙</p>
+</footer>
+
+<script>
+  // Photo Upload
+  function loadPhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = document.getElementById('profileImg');
+      const initials = document.getElementById('avatarInitials');
+      img.src = e.target.result;
+      img.style.display = 'block';
+      initials.style.display = 'none';
+      document.getElementById('avatarCircle').style.background = 'transparent';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Dark Mode Toggle
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+    const btn = document.querySelector('.theme-toggle');
+    btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+  }
+
+  // Scroll Animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Counter Animation
+  function animateCounter(id, target, suffix = '') {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let current = 0;
+    const duration = 2000;
+    const steps = 60;
+    const increment = target / steps;
+    const interval = duration / steps;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.floor(current) + suffix;
+    }, interval);
+  }
+
+  // Trigger counters when visible
+  let countersTriggered = false;
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !countersTriggered) {
+        countersTriggered = true;
+        animateCounter('counter1', 500, '+');
+        animateCounter('counter2', 200, '+');
+        animateCounter('counter3', 100, '%');
+        animateCounter('counter4', 2, '+');
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if(document.querySelector('.stats-bar')) statsObserver.observe(document.querySelector('.stats-bar'));
+
+
+  // ===== PDF RESUME DOWNLOAD =====
+  function downloadResumePDF(e) {
+    e.preventDefault();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+    const W = 210, margin = 18;
+    let y = 0;
+
+    // --- HEADER BLOCK ---
+    doc.setFillColor(15, 23, 42);
+    doc.rect(0, 0, W, 52, 'F');
+
+    doc.setFillColor(212, 168, 83);
+    doc.rect(0, 52, W, 3, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(26);
+    doc.setTextColor(255, 255, 255);
+    doc.text('RAUSHAN KUMAR SINGH', margin, 22);
+
+    doc.setFontSize(12);
+    doc.setTextColor(212, 168, 83);
+    doc.text('Operations Executive | TPA & Financial Services Specialist', margin, 32);
+
+    doc.setFontSize(9);
+    doc.setTextColor(200, 210, 230);
+    doc.setFont('helvetica', 'normal');
+    doc.text('📞 7070777443', margin, 42);
+    doc.text('✉ raushankrsingh802214@gmail.com', margin + 38, 42);
+    doc.text('📍 Chandan Nagar, Pune 411014', margin + 106, 42);
+
+    y = 64;
+
+    // Helper: Section Title
+    function sectionTitle(title) {
+      doc.setFillColor(240, 245, 255);
+      doc.rect(margin - 2, y - 5, W - (margin * 2) + 4, 10, 'F');
+      doc.setFillColor(30, 58, 138);
+      doc.rect(margin - 2, y - 5, 4, 10, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(11);
+      doc.setTextColor(15, 23, 42);
+      doc.text(title.toUpperCase(), margin + 6, y + 2);
+      y += 10;
+    }
+
+    // Helper: check page space
+    function checkPage(needed = 14) {
+      if (y + needed > 280) {
+        doc.addPage();
+        y = 18;
+      }
+    }
+
+    // Helper: bullet line with word wrap
+    function bulletLine(text, indent = margin + 4) {
+      const lines = doc.splitTextToSize('• ' + text, W - indent - margin);
+      checkPage(lines.length * 5 + 2);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(51, 65, 85);
+      doc.text(lines, indent, y);
+      y += lines.length * 5 + 1;
+    }
+
+    // ---- PROFESSIONAL SUMMARY ----
+    sectionTitle('Professional Summary');
+    y += 2;
+    const summary = 'Detail-oriented Operations Executive with 2+ years of experience in Health Insurance TPA and Financial Services, specializing in claims processing, payment operations, document verification, and customer communication. Skilled in SAP, CRM systems, and MS Excel, with a proven ability to manage high-volume workflows — processing 200+ cases daily and handling 80–100 client emails — while maintaining 100% accuracy and full regulatory compliance. Recognized as Best Employee of the Month (February 2026) for outstanding performance.';
+    const sumLines = doc.splitTextToSize(summary, W - margin * 2);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.setTextColor(51, 65, 85);
+    doc.text(sumLines, margin, y);
+    y += sumLines.length * 5.5 + 6;
+
+    // ---- KEY ACHIEVEMENTS ----
+    checkPage(20);
+    sectionTitle('Key Achievements');
+    y += 2;
+    const achievements = [
+      ['500+', 'Health insurance claims processed monthly with 100% accuracy'],
+      ['200+', 'Customer cases handled per day at Altruist Technology'],
+      ['80–100', 'Client emails managed daily with zero-delay responses'],
+      ['⭐', 'Best Employee of the Month — February 2026 (Md India Networx TPA)'],
+    ];
+    achievements.forEach(([num, desc]) => {
+      checkPage(8);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.setTextColor(30, 58, 138);
+      doc.text(num, margin + 2, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      doc.text(desc, margin + 20, y);
+      y += 6;
+    });
+    y += 4;
+
+    // ---- EXPERIENCE ----
+    checkPage(20);
+    sectionTitle('Professional Experience');
+    y += 3;
+
+    // Job 1
+    checkPage(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(15, 23, 42);
+    doc.text('Md India Networx TPA', margin, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(100, 116, 139);
+    doc.text('Jun 2025 – Present', W - margin, y, { align: 'right' });
+    y += 5;
+    doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(9.5);
+    doc.setTextColor(212, 168, 83);
+    doc.text('Claims & Payment Operations Executive — ONGC Project', margin, y);
+    y += 6;
+
+    bulletLine('Managed 80–100 client emails daily with zero-delay responses, ensuring seamless communication with ONGC representatives.');
+    bulletLine('Processed and validated 500+ health insurance claims and reimbursement requests monthly for ONGC employees with 100% accuracy.');
+    bulletLine('Resolved payment queries, verified transaction details, and coordinated approvals within defined TAT.');
+    bulletLine('Evaluated claim documents and payment eligibility per ONGC contract terms and TPA regulatory guidelines, ensuring full compliance.');
+    bulletLine('Maintained audit-ready records in CRM/ticketing systems, supporting compliance reporting with zero discrepancies.');
+    y += 5;
+
+    // Job 2
+    checkPage(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(15, 23, 42);
+    doc.text('Altruist Technology Pvt. Ltd.', margin, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(100, 116, 139);
+    doc.text('Aug 2024 – May 2025', W - margin, y, { align: 'right' });
+    y += 5;
+    doc.setFont('helvetica', 'bolditalic');
+    doc.setFontSize(9.5);
+    doc.setTextColor(212, 168, 83);
+    doc.text('Financial Services Operations Executive — Bajaj Finserv', margin, y);
+    y += 6;
+
+    bulletLine('Processed 200+ customer cases per day with zero-error accuracy for Bajaj Finserv EMI Card backend operations.');
+    bulletLine('Evaluated and processed credit limit enhancement requests by verifying eligibility criteria and coordinating approvals.');
+    bulletLine('Executed KYC-linked profile updates (name corrections, DOB amendments) in strict compliance with data verification protocols.');
+    bulletLine('Validated customer documents for account modifications, ensuring accurate data entry and timely record updates within defined TAT.');
+    y += 5;
+
+    // ---- SKILLS ----
+    checkPage(40);
+    sectionTitle('Key Skills');
+    y += 3;
+
+    const skillCols = [
+      { title: 'Technical Proficiency', items: ['MS Excel (Data Entry & Formatting)', 'Outlook & Email Management', 'SAP (Data Entry & Tracking)', 'CRM & Ticketing Systems', 'e-Claim Portal', 'MS Office Suite'] },
+      { title: 'Operational Expertise', items: ['Claim Processing & Validation', 'Document Verification & KYC Compliance', 'Payment Processing & Reimbursement', 'Back Office Operations', 'Audit & Compliance Reporting', 'SLA / TAT Adherence'] },
+    ];
+
+    const colW = (W - margin * 2 - 8) / 2;
+    skillCols.forEach((col, i) => {
+      const colX = margin + i * (colW + 8);
+      let colY = y;
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.setTextColor(30, 58, 138);
+      doc.text(col.title, colX, colY);
+      colY += 5;
+      col.items.forEach(item => {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(51, 65, 85);
+        doc.text('• ' + item, colX, colY);
+        colY += 5;
+      });
+    });
+    y += 40;
+
+    // ---- EDUCATION ----
+    checkPage(35);
+    sectionTitle('Education');
+    y += 3;
+
+    const eduItems = [
+      ['B.A. (Bachelor of Arts)', 'Anjabit Singh College — 2nd Year (Pursuing)', 'Expected 2029'],
+      ['Intermediate / 10+2 (Science)', 'Ram Rup 10+2 High School', '2025'],
+      ['Matriculation / 10th', 'Ram Rup 10+2 High School', '2021'],
+    ];
+
+    eduItems.forEach(([deg, inst, yr]) => {
+      checkPage(12);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(15, 23, 42);
+      doc.text(deg, margin, y);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(100, 116, 139);
+      doc.text(yr, W - margin, y, { align: 'right' });
+      y += 5;
+      doc.setFontSize(9);
+      doc.setTextColor(51, 65, 85);
+      doc.text(inst, margin, y);
+      y += 8;
+    });
+
+    // Languages
+    y += 2;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.5);
+    doc.setTextColor(30, 58, 138);
+    doc.text('Languages:', margin, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(51, 65, 85);
+    doc.text('Hindi  |  English  |  Marathi', margin + 26, y);
+    y += 10;
+
+    // ---- FOOTER ----
+    checkPage(14);
+    doc.setFillColor(15, 23, 42);
+    doc.rect(0, 285, W, 12, 'F');
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(212, 168, 83);
+    doc.text('raushankrsingh802214@gmail.com  |  7070777443  |  Pune, Maharashtra', W / 2, 292, { align: 'center' });
+
+    doc.save('Raushan_Kumar_Singh_Resume.pdf');
+  }
+
+  // Smooth Scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
